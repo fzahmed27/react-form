@@ -4,12 +4,16 @@ import time
 
 app = Flask(__name__)
 
-
 # Initialize CORS with the app and configure allowed origins
 CORS(app, origins="http://localhost:3000/")
 
+# Variable to simulate the solenoid valve state
+solenoid_valve_open = False
+
 @app.route('/run_test', methods=['GET', 'POST', 'OPTIONS'])
 def run_test():
+    global solenoid_valve_open
+    
     if request.method == 'GET':
         # Handle the GET request here
         # Replace with actual logic to retrieve or generate pressure data
@@ -17,19 +21,24 @@ def run_test():
         response = jsonify({"message": "GET request successful", "pressure_data": pressure_data})
 
     elif request.method == 'POST':
-        # Handle the POST request here
-        
         try:
-            # Simulate opening a solenoid valve (this is just a simulation)
-            print("Opening solenoid valve...")
-            time.sleep(5)  # Simulate the time it takes to open the valve
+            # Check the current state of the solenoid valve
+            if solenoid_valve_open:
+                response = jsonify({"message": "Solenoid valve is already open"})
+            else:
+                # Simulate opening the solenoid valve (this is just a simulation)
+                print("Opening solenoid valve...")
+                time.sleep(5)  # Simulate the time it takes to open the valve
 
-            # Read pressure data
-            # Replace with actual logic to read pressure data
-            pressure_data = 50
+                # Update the solenoid valve state
+                solenoid_valve_open = True
 
-            # Create a JSON response with the result
-            response = jsonify({"message": "POST request successful", "pressure_data": pressure_data})
+                # Read pressure data
+                # Replace with actual logic to read pressure data
+                pressure_data = 50
+
+                # Create a JSON response with the result
+                response = jsonify({"message": "POST request successful", "pressure_data": pressure_data})
 
         except Exception as e:
             # Handle any exceptions that may occur during the POST request handling
