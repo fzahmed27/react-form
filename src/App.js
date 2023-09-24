@@ -14,6 +14,7 @@ function App() {
 
       if (response.status === 200) {
         const data = await response.json();
+        console.log(data.message)
         setMessage(data.message);
         // Toggle the solenoid state when the POST request is successful
         setSolenoidState((prevState) => !prevState);
@@ -32,6 +33,7 @@ function App() {
         <h1>React App</h1>
         <p>Message from Flask API:</p>
         <p>{message}</p>
+        
         <p>Solenoid Valve State: {solenoidState ? 'Open' : 'Closed'}</p>
         <button onClick={toggleSolenoidValve}>
           {solenoidState ? 'Close Solenoid Valve' : 'Open Solenoid Valve'}
