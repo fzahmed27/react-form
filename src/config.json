@@ -1,0 +1,13 @@
+{
+  "staging": {
+    "post": "https://fusion.staging.paygoenergy.io/api/v1/assembly-events",
+    "get": "https://fusion.staging.paygoenergy.io/api/v1/assembly-parts/SERIALXYZ"
+  },
+  "production": {
+    "post": "https://fusion.paygoenergy.io/api/v1/assembly-events",
+    "get": "https://fusion.paygoenergy.io/api/v1/assembly-parts/SERIALXYZ"
+  },
+  "tone_pass_threshold": -35,
+  "expected_prefix": "EF",
+  "expected_suffix": "K231300001"
+}
